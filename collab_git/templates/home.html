@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load staticfiles %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
+  </head>
+  <body class="body">
+    <div id="navbar">
+      {% if user.is_authenticated %}
+      <div class="navitem">
+        <a href="{% url 'home'%}">HOME</a>
+      </div>
+      <div class="navitem">안녕하세요, {{ user.username }} 님</div>
+      <div class="navitem">
+        <a href="{% url 'logout'%}">로그아웃</a>
+      </div>
+      {% else %}
+      <div class="navitem">
+        <a href="{% url 'home'%}">HOME</a>
+      </div>
+      <div class="navitem">
+        <a href="{% url 'login'%}">로그인</a>
+      </div>
+      <div class="navitem">
+        <a href="{% url 'signup' %}">회원가입</a>
+      </div>
+      <div class="navitem">
+        <a href="{% url 'new' %}">글쓰기</a>
+      </div>
+      {% endif %}
+    </div>
+    {% for post in posts %}
+    <li>
+      <a href="{% url 'detail' post.pk %}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+    <h1 class="lion_review">MACKTA</h1>
+  </body>
+</html>

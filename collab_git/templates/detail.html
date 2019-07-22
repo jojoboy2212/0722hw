@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>{{ post.title }}</h2>
+    <h5>{{ post.contents }}</h5>
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'edit' post.pk %}">수정하기</a>
+    <a href="{% url 'delete' post.pk %}">삭제하기</a>
+  
+     <h4>댓글</h4>
+     <br>
+    <ul>
+      {% for comment in post.comments.all %}
+        <li>{{ comment.content }} <a href="{% url 'comment_delete' post.pk comment.pk %}">삭제하기</a></li>
+      {% endfor %}
+    </ul>
+
+    <form method='POST'>{% csrf_token %}
+      <div class='commentBox'>
+        {{ form.as_p }}
+        <button type='submit'>등록하기</button>
+    </form>
+  </body>
+</html>

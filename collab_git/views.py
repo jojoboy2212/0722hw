@@ -17,7 +17,7 @@ def new(request):
         form = PostForm(request.POST, request.FILES)
         post = form.save(commit=False)
         post.author = request.user.get_username()
-        post.save()
+        form.save()
         return redirect('detail', post.pk)
     else:
         form = PostForm()

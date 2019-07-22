@@ -7,12 +7,11 @@
     <title>Document</title>
   </head>
   <body>
-    {% extends "home.html" %}
-    <h1>수정하기 !</h1>
+    <h2>회원가입</h2>
     <form method="POST">
-      {% csrf_token %}
+      {% csrf_token%}
       {{ form.as_p }}
-      <button type="submit">edit</button>
+      <input type="submit" value="확인" />
     </form>
   </body>
 </html>
